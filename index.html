@@ -12,11 +12,12 @@
     <div class="ticker-inner" id="tickerEl" aria-live="polite"></div>
   </div>
 
-  <!-- СТАНДАРТНАЯ НАВИГАЦИЯ (новая) -->
+  <!-- СТАНДАРТНАЯ НАВИГАЦИЯ -->
   <header class="main-header">
     <div class="header-container">
       <div class="logo-area">
-        <img src="logo.png" alt="Link logo" class="header-logo" id="headerLogo" />
+        <!-- Если логотипа нет, закомментируйте строку ниже или создайте файл logo.png -->
+        <img src="logo.png" alt="Link logo" class="header-logo" id="headerLogo" onerror="this.style.display='none'" />
         <div class="logo-text">Link</div>
       </div>
       
@@ -51,7 +52,7 @@
     </div>
   </header>
 
-  <!-- Боковая навигация (оставляем как есть, но можно скрыть на мобильных) -->
+  <!-- Боковая навигация (видна только на десктопе) -->
   <nav class="thread-nav" id="threadNav" aria-label="Навигация по разделам">
     <svg id="threadSvg" aria-hidden="true"></svg>
   </nav>
