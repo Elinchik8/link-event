@@ -1071,3 +1071,14 @@ textarea { resize: vertical; min-height: 80px; }
     white-space: nowrap; /* чтобы текст кнопки не переносился */
   }
 }
+/* видео на главной */
+.fullscreen-carousel {
+  width: 100vw;
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+  margin: 0 0 32px 0;
+  background: var(--ink);
+  overflow: hidden;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+}
