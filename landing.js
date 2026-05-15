@@ -9,7 +9,6 @@ const TEXTS = {
 
   /** Боковая навигация: id секции, подпись, иконка (для title) */
  nav: [
- 
   { id: "formats", label: "ФОРМАТЫ", icon: "✦" },
   { id: "how", label: "КАК ЭТО", icon: "◈" },
   { id: "cases", label: "ДЕЛА", icon: "⚿" },
@@ -37,14 +36,37 @@ const TEXTS = {
     dateLine: "  ",
   },
 
+  // видео на главной
+  fullscreenCarousel: {
+  images: [
+    {
+      src: "yandex.jpg",
+      alt: "Детективная игра в кофейне",
+      caption: "Расследование по ролям"
+    },
+    {
+      src: "https://via.placeholder.com/1920x800?text=D&D+сессия",
+      alt: "D&D приключение",
+      caption: "Живые эмоции"
+    },
+    {
+      src: "https://via.placeholder.com/1920x800?text=Корпоратив",
+      alt: "Корпоративное мероприятие",
+      caption: "Командный дух"
+    }
+  ],
+  interval: 5000  // смена каждые 5 секунд
+}
   
   hero: {
+
+  
     sectionLabel: "◈ ЭКСТРЕННЫЙ ВЫПУСК!",
     headlineLines: ["Без сложных правил. Только атмосфера, общение и живая история."],
     deck:
-      "Агентство иммерсивных ролевых мероприятий. Два формата — детективная игра и D&D — на площадках с историческим духом: кофейнях, ресторанах и музеях.",
+      "Агентство иммерсивных ролевых мероприятий. Два формата — детективная игра и D&D — уникальные авторские игры",
     lead:
-      "Каждая игра — живая история. Вы не зритель, а участник. Сыщик, раскрывающий преступление. Герой, прокладывающий путь сквозь тёмные земли. ",
+      "Каждая игра — живая история. Вы не зритель, а участник. Подозреваемый и одновременно детектив, раскрывающий преступление. Герой, прокладывающий путь сквозь тёмные земли. ",
     ctaSchedule: "Выбрать дату",
     ctaFormats: "О форматах",
     featureTitleLines: ["«Разгадайте тайну.", "Вживайтесь в роль»"],
@@ -52,7 +74,7 @@ const TEXTS = {
     nextEventTag: "◈ Ближайшее мероприятие",
     nextEventTitle: "Тайна шести карманов",
     nextEventWhen: "Сб, 26 апреля · 16:00 · Детективъ",
-    nextEventSeats: "Осталось 3 места изъ 8",
+    nextEventSeats: "Осталось 3 места из 8",
     nextEventBtn: "Записаться →",
     pullQuote: "Не квест. Не театр. Не настолка. Что-то своё.",
   },
@@ -93,11 +115,11 @@ const TEXTS = {
     title: "Как это работает",
     steps: [
       { num: "1", title: "Выберите мероприятие", text: "Открытая игра из расписания: детективная или D&D." },
-      { num: "2", title: "Бронируешь место на удобную дату", text: "Играем в основном по пятницам и выходным" },
+      { num: "2", title: "Бронируете место на удобную дату", text: "Играем каждую неделю в разные сюжеты" },
       { num: "3", title: "Приходите и играйте", text: "Следователь или мастер даёт вам роль и плавно погружает вас в процесс" },
     ],
     fleuron: "✦ ❖ ✦",
-    footnote: "Никакого опыта не нужно. Мастер адаптирует игру под запрос участников",
+    footnote: "Никакого опыта не нужно. Зарнее готовиться тоже не надо. Главное - ваш желание стать частью истории",
   },
 
   cases: {
@@ -106,7 +128,7 @@ const TEXTS = {
     ornamentDnd: "D&D · Ролевые приключенія",
     detective: [
       { title: "Тайна шести кармановъ", desc: "Франция 60х. Художник мёртв, шедевр исчез. Кто убийца — жена, ученик или тихий сосед?", diff: "Уровень: средний", seats: "10 чел." },
-      { title: "Призракъ поместья", desc: "1924 годъ, особняк, дверь заперта изнутри. Самоубийство — или месть призрака?", diff: "Уровень : средний", seats: "8 чел." },
+      { title: "Призракъ поместья", desc: "1924 годъ, особняк, дверь заперта изнутри - в гостинной тело. Самоубийство — или месть призрака?", diff: "Уровень : средний", seats: "8 чел." },
       { title: "Диагноз: неизвестный", desc: "Больница, загадочные смерти, тела кремировны. Кто следующий и кому это нужно?", diff: "Уровень: простой", seats: "10 чел." },
     ],
     dnd: [
@@ -358,6 +380,24 @@ function renderPage(t) {
           </div>
         </div>
       </div>
+          <!-- ПОЛНОЭКРАННАЯ КАРУСЕЛЬ -->
+    <div class="fullscreen-carousel" id="fullscreenCarousel">
+      <div class="carousel-container">
+        <div class="carousel-slides" id="carouselSlides">
+          ${t.fullscreenCarousel.images.map((img, idx) => `
+            <div class="carousel-slide ${idx === 0 ? 'active' : ''}">
+              <img src="${esc(img.src)}" alt="${esc(img.alt)}">
+              <div class="carousel-caption">${esc(img.caption)}</div>
+            </div>
+          `).join('')}
+        </div>
+        <button class="carousel-btn prev" id="carouselPrev">❮</button>
+        <button class="carousel-btn next" id="carouselNext">❯</button>
+        <div class="carousel-dots-full" id="carouselDots">
+          ${t.fullscreenCarousel.images.map((_, idx) => `<span class="dot" data-index="${idx}"></span>`).join('')}
+        </div>
+      </div>
+    </div>
     </section>
 
     <!-- СЕКЦИЯ 2: ФОРМАТЫ - детектив и D&D -->
@@ -1010,7 +1050,77 @@ function addVideoReviews() {
   // Вставляем видео после текстовых отзывов
   reviewsSection.appendChild(videoBlock);
 }
+// ========== ПОЛНОЭКРАННАЯ КАРУСЕЛЬ ==========
+function initFullscreenCarousel() {
+  const slides = document.querySelectorAll('#carouselSlides .carousel-slide');
+  const prevBtn = document.getElementById('carouselPrev');
+  const nextBtn = document.getElementById('carouselNext');
+  const dotsContainer = document.getElementById('carouselDots');
+  if (!slides.length) return;
 
+  let currentIndex = 0;
+  let interval;
+  const intervalTime = TEXTS.fullscreenCarousel?.interval || 5000;
+
+  function showSlide(index) {
+    slides.forEach((slide, i) => {
+      slide.classList.toggle('active', i === index);
+    });
+    // обновить активную точку
+    const dots = document.querySelectorAll('#carouselDots .dot');
+    if (dots.length) {
+      dots.forEach((dot, i) => {
+        dot.classList.toggle('active', i === index);
+      });
+    }
+    currentIndex = index;
+  }
+
+  function nextSlide() {
+    let newIndex = currentIndex + 1;
+    if (newIndex >= slides.length) newIndex = 0;
+    showSlide(newIndex);
+  }
+
+  function prevSlide() {
+    let newIndex = currentIndex - 1;
+    if (newIndex < 0) newIndex = slides.length - 1;
+    showSlide(newIndex);
+  }
+
+  function startAutoSlide() {
+    if (interval) clearInterval(interval);
+    interval = setInterval(nextSlide, intervalTime);
+  }
+
+  function stopAutoSlide() {
+    if (interval) clearInterval(interval);
+  }
+
+  // обработчики кнопок
+  if (prevBtn) prevBtn.addEventListener('click', () => { prevSlide(); stopAutoSlide(); startAutoSlide(); });
+  if (nextBtn) nextBtn.addEventListener('click', () => { nextSlide(); stopAutoSlide(); startAutoSlide(); });
+
+  // обработчики точек
+  const dots = document.querySelectorAll('#carouselDots .dot');
+  dots.forEach((dot, idx) => {
+    dot.addEventListener('click', () => {
+      showSlide(idx);
+      stopAutoSlide();
+      startAutoSlide();
+    });
+  });
+
+  // пауза при наведении
+  const container = document.querySelector('.fullscreen-carousel');
+  if (container) {
+    container.addEventListener('mouseenter', stopAutoSlide);
+    container.addEventListener('mouseleave', startAutoSlide);
+  }
+
+  startAutoSlide();
+}
+      
 // ========== ФУНКЦИЯ ДЛЯ ЗАМЕНЫ СТАРОЙ НАВИГАЦИИ НА НОВУЮ ==========
 // Эту функцию нужно вызвать после рендеринга страницы
 
@@ -1122,6 +1232,7 @@ document.querySelectorAll("[data-scroll]").forEach((btn) => {
   // НОВЫЕ ФУНКЦИИ:
   initNewFeatures();
    initPortfolioCarousels();
+  initFullscreenCarousel();
  
 }
 
