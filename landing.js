@@ -20,14 +20,14 @@ const TEXTS = {
   { id: "faq", label: "FAQ", icon: "?" },
 ],
 
-  ticker: {
+/**  ticker: {
     urgent: "◈ СРОЧНО ◈",
     lines: [
       "ДЕТЕКТИВНЫЕ ИГРЫ",
       "МЕРОПРИЯТИЯ ПОД КЛЮЧ",
       "РАЗГАДАЙТЕ ТАЙНУ",
     ],
-  },
+  },*/
 
   masthead: {
    /** left: "АГЕНТСТВО РОЛЕВЫХ МЕРОПРИЯТИЙ",
@@ -267,7 +267,7 @@ portfolio: {
       { href: "#schedule", label: "Расписаніе" },
       { href: "#order", label: "Заказать" },
       { href: "#faq", label: "FAQ" },
-      { href: "#", label: "Telegram" },
+      { href: "https://t.me/babyshina_el", label: "Telegram" },
     ],
     copy: "© 2025 Агентство ролевых игр Link · Все права защищены",
   },
@@ -658,10 +658,15 @@ function renderPage(t) {
  * Функция генерации подвала сайта (footer)
  * Содержит логотип, слоган, навигационные ссылки, копирайт
  */
-function renderFooter(t) {
+
   // Генерируем HTML для ссылок
+ function renderFooter(t) {
   const links = t.footer.links
-    .map((l) => `<a href="${esc(l.href)}">${esc(l.label)}</a>`)
+    .map((l) => {
+      const isExternal = l.href.startsWith('http://') || l.href.startsWith('https://');
+      const targetAttr = isExternal ? ' target="_blank" rel="noopener noreferrer"' : '';
+      return `<a href="${esc(l.href)}"${targetAttr}>${esc(l.label)}</a>`;
+    })
     .join("\n        ");
   
   return `
@@ -672,6 +677,7 @@ function renderFooter(t) {
       <p class="footer-copy">${esc(t.footer.copy)}</p>
     </div>
   `;
+}
 }
 
 /**
