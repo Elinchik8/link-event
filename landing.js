@@ -9,6 +9,7 @@ const TEXTS = {
 
   /** Боковая навигация: id секции, подпись, иконка (для title) */
  nav: [
+  { id: "hero", label: "ГЛАВНАЯ", icon: "❖" }
   { id: "formats", label: "ФОРМАТЫ", icon: "✦" },
   { id: "how", label: "КАК ЭТО", icon: "◈" },
   { id: "cases", label: "ДЕЛА", icon: "⚿" },
@@ -56,10 +57,9 @@ const TEXTS = {
     }
   ],
   interval: 5000  // смена каждые 5 секунд
-}
+},
   
   hero: {
-
   
     sectionLabel: "◈ ЭКСТРЕННЫЙ ВЫПУСК!",
     headlineLines: ["Без сложных правил. Только атмосфера, общение и живая история."],
