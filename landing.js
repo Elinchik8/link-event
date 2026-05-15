@@ -46,12 +46,12 @@ const TEXTS = {
       caption: "Расследование по ролям"
     },
     {
-      src: "https://via.placeholder.com/1920x800?text=D&D+сессия",
+      src: "yandex2.jpg",
       alt: "D&D приключение",
       caption: "Живые эмоции"
     },
     {
-      src: "https://via.placeholder.com/1920x800?text=Корпоратив",
+      src: "yandex3.jpg",
       alt: "Корпоративное мероприятие",
       caption: "Командный дух"
     }
