@@ -346,6 +346,26 @@ function renderPage(t) {
       <div class="masthead-date">${esc(t.masthead.dateLine)}</div> <!-- дата выпуска -->
     </div>
 
+     <!-- ПОЛНОЭКРАННАЯ КАРУСЕЛЬ -->
+    <div class="fullscreen-carousel" id="fullscreenCarousel">
+      <div class="carousel-container">
+        <div class="carousel-slides" id="carouselSlides">
+          ${t.fullscreenCarousel.images.map((img, idx) => `
+            <div class="carousel-slide ${idx === 0 ? 'active' : ''}">
+              <img src="${esc(img.src)}" alt="${esc(img.alt)}">
+              <div class="carousel-caption">${esc(img.caption)}</div>
+            </div>
+          `).join('')}
+        </div>
+        <button class="carousel-btn prev" id="carouselPrev">❮</button>
+        <button class="carousel-btn next" id="carouselNext">❯</button>
+        <div class="carousel-dots-full" id="carouselDots">
+          ${t.fullscreenCarousel.images.map((_, idx) => `<span class="dot" data-index="${idx}"></span>`).join('')}
+        </div>
+      </div>
+    </div>
+    </section>
+
     <!-- СЕКЦИЯ 1: ГЕРОЙ/HERO - главный блок с призывом к действию -->
     <section id="hero">
       <div class="section-head">${esc(h.sectionLabel)}</div>  <!-- "◈ ЭКСТРЕННЫЙ ВЫПУСК!" -->
@@ -380,25 +400,7 @@ function renderPage(t) {
           </div>
         </div>
       </div>
-          <!-- ПОЛНОЭКРАННАЯ КАРУСЕЛЬ -->
-    <div class="fullscreen-carousel" id="fullscreenCarousel">
-      <div class="carousel-container">
-        <div class="carousel-slides" id="carouselSlides">
-          ${t.fullscreenCarousel.images.map((img, idx) => `
-            <div class="carousel-slide ${idx === 0 ? 'active' : ''}">
-              <img src="${esc(img.src)}" alt="${esc(img.alt)}">
-              <div class="carousel-caption">${esc(img.caption)}</div>
-            </div>
-          `).join('')}
-        </div>
-        <button class="carousel-btn prev" id="carouselPrev">❮</button>
-        <button class="carousel-btn next" id="carouselNext">❯</button>
-        <div class="carousel-dots-full" id="carouselDots">
-          ${t.fullscreenCarousel.images.map((_, idx) => `<span class="dot" data-index="${idx}"></span>`).join('')}
-        </div>
-      </div>
-    </div>
-    </section>
+         
 
     <!-- СЕКЦИЯ 2: ФОРМАТЫ - детектив и D&D -->
         <section id="formats">
