@@ -115,6 +115,54 @@ const TEXTS = {
     btnBook: "Записаться",
   },
 
+portfolio: {
+  sectionLabel: "◈ ПОРТФОЛИО",
+  title: "Наши кейсы",
+  items: [
+    {
+      id: "alpine",
+      mainImage: "https://via.placeholder.com/800x500?text=Алмазный+заговор",
+      additionalImages: [
+        "https://via.placeholder.com/800x500?text=Фото+1",
+        "https://via.placeholder.com/800x500?text=Фото+2"
+      ],
+      title: "Алмазный заговор",
+      budget: "45 000 ₽",
+      description: `<strong>Заказчик:</strong> Альпина Паблишер<br>
+        Игра создана для презентации новой книги об ограблении. Сюжет основан на одном из самых наглых ограблений в истории, которое так и не раскрыли до конца. В финале игры мы рассказываем, как преступникам в реальной жизни удалось взломать самый неприступный сейф в мире.<br>
+        <strong>Результат:</strong> сценарий «Алмазный заговор» теперь в нашей коллекции.`,
+      tags: ["издательство", "презентация", "ограбление века"]
+    },
+    {
+      id: "yandex",
+      mainImage: "https://via.placeholder.com/800x500?text=Яндекс.Книги",
+      additionalImages: [
+        "https://via.placeholder.com/800x500?text=Фото+1",
+        "https://via.placeholder.com/800x500?text=Фото+2"
+      ],
+      title: "Игра для Яндекс.Книги",
+      budget: "50 000 ₽",
+      description: `<strong>Задача:</strong> провести игру для писателей и друзей Яндекс.Книги (20 человек).<br>
+        Адаптировали сценарий «Тайна шести карманов» под особенности заказчика. Фишка: разделение на активные роли подозреваемых и команду следователей, которые наблюдают, допрашивают и строят версии.`,
+      tags: ["книжное издательство", "тимбилдинг", "20 человек"]
+    },
+    {
+      id: "office",
+      mainImage: "https://via.placeholder.com/800x500?text=Корпоратив+23+февраля",
+      additionalImages: [
+        "https://via.placeholder.com/800x500?text=Фото+1",
+        "https://via.placeholder.com/800x500?text=Фото+2"
+      ],
+      title: "Корпоратив для коллег в офисе",
+      budget: "15 000 ₽",
+      description: `<strong>Подарок на 23 февраля.</strong> Девушки решили устроить интеллектуальный сюрприз мужчинам.<br>
+        Сюжет «Операция "Джаз"» про 60-е, подпольный джаз-клуб и криминал. Мужчины отлично вжились в женские роли — было много смеха. В конце голосование и «арест» (посадили невиновного, но это не главное).<br>
+        <strong>Эмоции:</strong> живые, неожиданные, сплотили коллектив.`,
+      tags: ["корпоратив", "23 февраля", "смех и драма"]
+    }
+  ]
+},
+
    schedule: {
     sectionLabel: "◈ РАСПИСАНИЕ · БЛИЖАЙШИЕ МЕРОПРИЯТИЯ",
     title: "Выберите дату",
@@ -384,6 +432,7 @@ function renderPage(t) {
           .join("")}
       </div>
     </section>
+
       
 
     <!-- СЕКЦИЯ 5: РАСПИСАНИЕ - таблица с мероприятиями -->
@@ -418,6 +467,43 @@ function renderPage(t) {
       </table>
       <p class="schedule-note">${esc(t.schedule.footnote)}</p>
     </section>
+
+    <!-- СЕКЦИЯ 9: ПОРТФОЛИО / КЕЙСЫ С КАРУСЕЛЬЮ -->
+<section id="portfolio">
+  <div class="section-head">${esc(t.portfolio.sectionLabel)}</div>
+  <div class="section-h1" style="margin-bottom:24px">${esc(t.portfolio.title)}</div>
+  <div class="portfolio-grid">
+    ${t.portfolio.items.map((item, idx) => `
+      <div class="portfolio-card" data-portfolio-id="${esc(item.id)}">
+        <div class="portfolio-carousel">
+          <div class="carousel-main">
+            <img class="carousel-main-img" src="${esc(item.mainImage)}" alt="${esc(item.title)}">
+          </div>
+          <div class="carousel-thumbnails">
+            ${item.additionalImages.map((img, i) => `
+              <img class="carousel-thumb" src="${esc(img)}" alt="Фото ${i+1}" data-index="${i}">
+            `).join('')}
+          </div>
+          <button class="carousel-prev" aria-label="Предыдущее фото">❮</button>
+          <button class="carousel-next" aria-label="Следующее фото">❯</button>
+          <div class="carousel-dots">
+            ${[item.mainImage, ...item.additionalImages].map((_, i) => `
+              <span class="carousel-dot ${i === 0 ? 'active' : ''}" data-index="${i}"></span>
+            `).join('')}
+          </div>
+        </div>
+        <div class="portfolio-info">
+          <h3 class="portfolio-title">${esc(item.title)}</h3>
+          <div class="portfolio-budget">Бюджет: ${esc(item.budget)}</div>
+          <div class="portfolio-description">${item.description}</div>
+          <div class="portfolio-tags">
+            ${item.tags.map(tag => `<span class="tag portfolio-tag">${esc(tag)}</span>`).join('')}
+          </div>
+        </div>
+      </div>
+    `).join('')}
+  </div>
+</section>
 
     <!-- СЕКЦИЯ 6: ЗАКАЗ ПОД КЛЮЧ - информация и форма -->
   <section id="order">
@@ -476,6 +562,43 @@ function renderPage(t) {
         </div>
       </div>
     </section>
+
+    <!-- СЕКЦИЯ 9: ПОРТФОЛИО / КЕЙСЫ С КАРУСЕЛЬЮ -->
+<section id="portfolio">
+  <div class="section-head">${esc(t.portfolio.sectionLabel)}</div>
+  <div class="section-h1" style="margin-bottom:24px">${esc(t.portfolio.title)}</div>
+  <div class="portfolio-grid">
+    ${t.portfolio.items.map((item, idx) => `
+      <div class="portfolio-card" data-portfolio-id="${esc(item.id)}">
+        <div class="portfolio-carousel">
+          <div class="carousel-main">
+            <img class="carousel-main-img" src="${esc(item.mainImage)}" alt="${esc(item.title)}">
+          </div>
+          <div class="carousel-thumbnails">
+            ${item.additionalImages.map((img, i) => `
+              <img class="carousel-thumb" src="${esc(img)}" alt="Фото ${i+1}" data-index="${i}">
+            `).join('')}
+          </div>
+          <button class="carousel-prev" aria-label="Предыдущее фото">❮</button>
+          <button class="carousel-next" aria-label="Следующее фото">❯</button>
+          <div class="carousel-dots">
+            ${[item.mainImage, ...item.additionalImages].map((_, i) => `
+              <span class="carousel-dot ${i === 0 ? 'active' : ''}" data-index="${i}"></span>
+            `).join('')}
+          </div>
+        </div>
+        <div class="portfolio-info">
+          <h3 class="portfolio-title">${esc(item.title)}</h3>
+          <div class="portfolio-budget">Бюджет: ${esc(item.budget)}</div>
+          <div class="portfolio-description">${item.description}</div>
+          <div class="portfolio-tags">
+            ${item.tags.map(tag => `<span class="tag portfolio-tag">${esc(tag)}</span>`).join('')}
+          </div>
+        </div>
+      </div>
+    `).join('')}
+  </div>
+</section>
 
     <!-- СЕКЦИЯ 7: ОТЗЫВЫ -->
    <section id="reviews">
