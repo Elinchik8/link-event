@@ -851,3 +851,194 @@ textarea { resize: vertical; min-height: 80px; }
     display: none;
   }
 }
+
+/* ========== ПОРТФОЛИО И КАРУСЕЛЬ ========== */
+.portfolio-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 48px;
+}
+
+.portfolio-card {
+  background: var(--paper);
+  border: 1px solid var(--gold);
+  box-shadow: var(--shadow);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  padding: 24px;
+  transition: transform 0.3s;
+}
+
+.portfolio-card:hover {
+  transform: translateY(-4px);
+}
+
+/* Карусель */
+.portfolio-carousel {
+  position: relative;
+  width: 100%;
+  background: #1a1410;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.carousel-main {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+}
+
+.carousel-main-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.3s;
+}
+
+.carousel-thumbnails {
+  display: flex;
+  gap: 8px;
+  padding: 8px;
+  background: rgba(0,0,0,0.5);
+  overflow-x: auto;
+}
+
+.carousel-thumb {
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+  cursor: pointer;
+  opacity: 0.7;
+  transition: opacity 0.2s, transform 0.2s;
+  border: 2px solid transparent;
+}
+
+.carousel-thumb:hover {
+  opacity: 1;
+  transform: scale(1.05);
+}
+
+.carousel-thumb.active {
+  border-color: var(--gold);
+  opacity: 1;
+}
+
+/* Кнопки prev/next */
+.carousel-prev, .carousel-next {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(0,0,0,0.6);
+  color: var(--cream);
+  border: none;
+  font-size: 28px;
+  padding: 8px 12px;
+  cursor: pointer;
+  z-index: 2;
+  transition: background 0.2s;
+  font-family: monospace;
+  line-height: 1;
+}
+
+.carousel-prev { left: 8px; }
+.carousel-next { right: 8px; }
+
+.carousel-prev:hover, .carousel-next:hover {
+  background: rgba(0,0,0,0.9);
+}
+
+/* Dots (индикаторы) */
+.carousel-dots {
+  position: absolute;
+  bottom: 12px;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  z-index: 2;
+}
+
+.carousel-dot {
+  width: 10px;
+  height: 10px;
+  background: rgba(255,255,255,0.5);
+  border-radius: 50%;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.carousel-dot.active {
+  background: var(--gold);
+}
+
+/* Информационная часть */
+.portfolio-info {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.portfolio-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--ink);
+  border-left: 4px solid var(--red);
+  padding-left: 12px;
+}
+
+.portfolio-budget {
+  font-family: 'Cinzel', serif;
+  font-size: 14px;
+  letter-spacing: 2px;
+  color: var(--red);
+  font-weight: bold;
+}
+
+.portfolio-description {
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--gray);
+  text-align: justify;
+}
+
+.portfolio-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.portfolio-tag {
+  background: var(--aged);
+  color: var(--ink);
+  border: 1px solid var(--gold);
+  font-size: 9px;
+  padding: 4px 8px;
+}
+
+/* Адаптив для мобильных */
+@media (max-width: 768px) {
+  .portfolio-card {
+    grid-template-columns: 1fr;
+    padding: 16px;
+    gap: 16px;
+  }
+  
+  .portfolio-title {
+    font-size: 20px;
+  }
+  
+  .carousel-thumb {
+    width: 40px;
+    height: 40px;
+  }
+  
+  .carousel-prev, .carousel-next {
+    font-size: 20px;
+    padding: 4px 8px;
+  }
+}
