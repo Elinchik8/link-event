@@ -9,7 +9,7 @@ const TEXTS = {
 
   /** Боковая навигация: id секции, подпись, иконка (для title) */
  nav: [
-  { id: "hero", label: "ГЛАВНАЯ", icon: "❖" }
+  { id: "hero", label: "ГЛАВНАЯ", icon: "❖" },
   { id: "formats", label: "ФОРМАТЫ", icon: "✦" },
   { id: "how", label: "КАК ЭТО", icon: "◈" },
   { id: "cases", label: "ДЕЛА", icon: "⚿" },
