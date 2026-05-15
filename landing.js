@@ -920,6 +920,28 @@ function main() {
 
   // НОВЫЕ ФУНКЦИИ:
   initNewFeatures();
+    // ===== ПЕРЕНАПРАВЛЕНИЕ НА TELEGRAM ПРИ КЛИКЕ НА "ЗАПИСАТЬСЯ" =====
+  const telegramUrl = 'https://t.me/babyshina_el';
+  
+  // Находим все кнопки, которые содержат текст "Записаться" (точное или частичное совпадение)
+  const allButtons = document.querySelectorAll('button, .cta-btn, .btn-tiny, .btn-table, .btn-tinier');
+  
+  allButtons.forEach(btn => {
+    const text = btn.textContent.trim();
+    // Проверяем, является ли кнопка кнопкой записи
+    if (text === 'Записаться' || text === 'Записаться →' || text === 'Записаться на детектив' || text === 'Записаться на D&D' || text.includes('Записаться')) {
+      // Удаляем все старые обработчики, которые могли быть навешаны (например, скролл)
+      const newBtn = btn.cloneNode(true);
+      btn.parentNode.replaceChild(newBtn, btn);
+      
+      // Добавляем новый обработчик
+      newBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        window.open(telegramUrl, '_blank');
+      });
+    }
+  });
 }
 
 document.addEventListener("DOMContentLoaded", main);
