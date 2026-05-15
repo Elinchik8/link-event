@@ -1042,3 +1042,32 @@ textarea { resize: vertical; min-height: 80px; }
     padding: 4px 8px;
   }
 }
+
+/* ========== ГОРИЗОНТАЛЬНАЯ ПРОКРУТКА ДЛЯ ТАБЛИЦЫ РАСПИСАНИЯ ========== */
+#schedule {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch; /* плавный скролл на iPhone */
+}
+
+#schedule table {
+  min-width: 550px;  /* чтобы таблица не сжималась, можно подобрать */
+  width: 100%;
+  border-collapse: collapse;
+}
+
+/* Дополнительная настройка для мобильных */
+@media (max-width: 680px) {
+  #schedule table {
+    min-width: 480px; /* чуть уже для маленьких экранов */
+  }
+  #schedule th,
+  #schedule td {
+    padding: 6px 6px;
+    font-size: 10px;
+  }
+  .btn-table {
+    padding: 4px 6px;
+    font-size: 8px;
+    white-space: nowrap; /* чтобы текст кнопки не переносился */
+  }
+}
