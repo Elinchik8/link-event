@@ -41,7 +41,7 @@ const TEXTS = {
   fullscreenCarousel: {
   images: [
     {
-      src: "yandex.jpg",
+      src: "yandex1.jpg",
       alt: "Детективная игра в кофейне",
       caption: "Расследование по ролям"
     },
