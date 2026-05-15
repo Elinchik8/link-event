@@ -149,10 +149,10 @@ portfolio: {
     },
     {
       id: "office",
-      mainImage: "images/yandex1.jpg",
+      mainImage: "yandex1.jpg",
       additionalImages: [
-        "images/yandex2.jpg",
-        "images/yandex3.jpg"
+        "yandex2.jpg",
+        "yandex3.jpg"
       ],
       title: "Корпоратив для коллег в офисе",
       budget: "15 000 ₽",
