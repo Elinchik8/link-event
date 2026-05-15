@@ -697,14 +697,43 @@ function main() {
   // Запускаем анимацию тикера
   setTicker(tickerEl, t.ticker.lines, t.ticker.urgent);
 
-  // Навешиваем обработчики на все кнопки с data-scroll атрибутом
-  // (кнопки "Выбрать дату", "О форматах", "Записаться →" и т.д.)
-  document.querySelectorAll("[data-scroll]").forEach((btn) => {
+ // ===== КНОПКИ "ЗАПИСАТЬСЯ" ВЕДУТ В TELEGRAM =====
+const telegramUrl = 'https://t.me/babyshina_el';
+
+// Находим все кнопки, которые могут быть кнопками записи
+const allButtons = document.querySelectorAll('button, .cta-btn, .btn-tiny, .btn-table, .btn-tinier');
+
+allButtons.forEach(btn => {
+  const text = btn.textContent.trim();
+  // Проверяем, является ли кнопка кнопкой записи (по тексту)
+  if (text === 'Записаться' || text === 'Записаться →' || 
+      text === 'Записаться на детектив' || text === 'Записаться на D&D' || 
+      text.includes('Записаться')) {
+    
+    // Удаляем атрибут data-scroll, чтобы не срабатывал скролл
+    btn.removeAttribute('data-scroll');
+    // Удаляем предыдущие обработчики (если были)
+    btn.onclick = null;
+    // Добавляем новый обработчик — открытие Telegram
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      window.open(telegramUrl, '_blank');
+    });
+  }
+});
+
+// ===== ОСТАЛЬНЫЕ КНОПКИ (с data-scroll) ВЕДУТ К СЕКЦИЯМ =====
+document.querySelectorAll("[data-scroll]").forEach((btn) => {
+  // Убедимся, что это не кнопка записи (дублируем защиту)
+  const text = btn.textContent.trim();
+  if (!text.includes('Записаться')) {
     btn.addEventListener("click", () => {
       const id = btn.getAttribute("data-scroll");
       if (id) scrollToId(id);
     });
-  });
+  }
+});
 
   // Строим боковую навигацию
   const pinNodes = [];
@@ -885,12 +914,43 @@ function main() {
 
   setTicker(tickerEl, t.ticker.lines, t.ticker.urgent);
 
-  document.querySelectorAll("[data-scroll]").forEach((btn) => {
+ // ===== КНОПКИ "ЗАПИСАТЬСЯ" ВЕДУТ В TELEGRAM =====
+const telegramUrl = 'https://t.me/babyshina_el';
+
+// Находим все кнопки, которые могут быть кнопками записи
+const allButtons = document.querySelectorAll('button, .cta-btn, .btn-tiny, .btn-table, .btn-tinier');
+
+allButtons.forEach(btn => {
+  const text = btn.textContent.trim();
+  // Проверяем, является ли кнопка кнопкой записи (по тексту)
+  if (text === 'Записаться' || text === 'Записаться →' || 
+      text === 'Записаться на детектив' || text === 'Записаться на D&D' || 
+      text.includes('Записаться')) {
+    
+    // Удаляем атрибут data-scroll, чтобы не срабатывал скролл
+    btn.removeAttribute('data-scroll');
+    // Удаляем предыдущие обработчики (если были)
+    btn.onclick = null;
+    // Добавляем новый обработчик — открытие Telegram
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      window.open(telegramUrl, '_blank');
+    });
+  }
+});
+
+// ===== ОСТАЛЬНЫЕ КНОПКИ (с data-scroll) ВЕДУТ К СЕКЦИЯМ =====
+document.querySelectorAll("[data-scroll]").forEach((btn) => {
+  // Убедимся, что это не кнопка записи (дублируем защиту)
+  const text = btn.textContent.trim();
+  if (!text.includes('Записаться')) {
     btn.addEventListener("click", () => {
       const id = btn.getAttribute("data-scroll");
       if (id) scrollToId(id);
     });
-  });
+  }
+});
 
   const pinNodes = [];
   buildThreadNav(threadNav, pinNodes, t);
@@ -920,28 +980,7 @@ function main() {
 
   // НОВЫЕ ФУНКЦИИ:
   initNewFeatures();
-    // ===== ПЕРЕНАПРАВЛЕНИЕ НА TELEGRAM ПРИ КЛИКЕ НА "ЗАПИСАТЬСЯ" =====
-  const telegramUrl = 'https://t.me/babyshina_el';
-  
-  // Находим все кнопки, которые содержат текст "Записаться" (точное или частичное совпадение)
-  const allButtons = document.querySelectorAll('button, .cta-btn, .btn-tiny, .btn-table, .btn-tinier');
-  
-  allButtons.forEach(btn => {
-    const text = btn.textContent.trim();
-    // Проверяем, является ли кнопка кнопкой записи
-    if (text === 'Записаться' || text === 'Записаться →' || text === 'Записаться на детектив' || text === 'Записаться на D&D' || text.includes('Записаться')) {
-      // Удаляем все старые обработчики, которые могли быть навешаны (например, скролл)
-      const newBtn = btn.cloneNode(true);
-      btn.parentNode.replaceChild(newBtn, btn);
-      
-      // Добавляем новый обработчик
-      newBtn.addEventListener('click', (e) => {
-        e.preventDefault();
-        e.stopPropagation();
-        window.open(telegramUrl, '_blank');
-      });
-    }
-  });
+ 
 }
 
 document.addEventListener("DOMContentLoaded", main);
