@@ -148,10 +148,10 @@ portfolio: {
     },
     {
       id: "office",
-      mainImage: "https://via.placeholder.com/800x500?text=Корпоратив+23+февраля",
+      mainImage: "images/portfolio/yandex1.jpg",
       additionalImages: [
-        "https://via.placeholder.com/800x500?text=Фото+1",
-        "https://via.placeholder.com/800x500?text=Фото+2"
+        "images/portfolio/yandex2.jpg",
+        "images/portfolio/yandex3.jpg"
       ],
       title: "Корпоратив для коллег в офисе",
       budget: "15 000 ₽",
@@ -955,7 +955,56 @@ function setupActiveNavLink() {
   
   sections.forEach(section => observer.observe(section));
 }
-
+// ========== ФУНКЦИЯ ДЛЯ КАРУСЕЛИ В ПОРТФОЛИО ==========
+function initPortfolioCarousels() {
+  const portfolioCards = document.querySelectorAll('.portfolio-card');
+  
+  portfolioCards.forEach(card => {
+    const mainImg = card.querySelector('.carousel-main-img');
+    const thumbs = card.querySelectorAll('.carousel-thumb');
+    const prevBtn = card.querySelector('.carousel-prev');
+    const nextBtn = card.querySelector('.carousel-next');
+    const dots = card.querySelectorAll('.carousel-dot');
+    
+    // Собираем все изображения: сначала главное, затем дополнительные
+    const allImages = [mainImg.src, ...Array.from(thumbs).map(t => t.src)];
+    let currentIndex = 0;
+    
+    // Функция обновления текущего изображения
+    function updateCarousel(index) {
+      if (index < 0) index = allImages.length - 1;
+      if (index >= allImages.length) index = 0;
+      currentIndex = index;
+      mainImg.src = allImages[currentIndex];
+      
+      // Обновляем активный класс у миниатюр
+      thumbs.forEach((thumb, i) => {
+        if (i === currentIndex - 1) thumb.classList.add('active');
+        else thumb.classList.remove('active');
+      });
+      
+      // Обновляем dots
+      dots.forEach((dot, i) => {
+        if (i === currentIndex) dot.classList.add('active');
+        else dot.classList.remove('active');
+      });
+    }
+    
+    // Обработчики для кнопок
+    if (prevBtn) prevBtn.addEventListener('click', () => updateCarousel(currentIndex - 1));
+    if (nextBtn) nextBtn.addEventListener('click', () => updateCarousel(currentIndex + 1));
+    
+    // Обработчики для миниатюр
+    thumbs.forEach((thumb, idx) => {
+      thumb.addEventListener('click', () => updateCarousel(idx + 1));
+    });
+    
+    // Обработчики для dots
+    dots.forEach((dot, idx) => {
+      dot.addEventListener('click', () => updateCarousel(idx));
+    });
+  });
+}
 // ========== ФУНКЦИЯ ДЛЯ ДОБАВЛЕНИЯ ВИДЕО-ОТЗЫВОВ ==========
 function addVideoReviews() {
   const reviewsSection = document.getElementById('reviews');
@@ -1009,7 +1058,12 @@ function initNewFeatures() {
   setupBurgerMenu();      // Бургер-меню
   setupActiveNavLink();   // Активная ссылка при скролле
   addVideoReviews();      // Видео в отзывах
+
+ 
+  
 }
+
+
 
 // Если вы хотите добавить это в существующий main, просто добавьте вызов:
 // initNewFeatures();
@@ -1103,6 +1157,7 @@ document.querySelectorAll("[data-scroll]").forEach((btn) => {
 
   // НОВЫЕ ФУНКЦИИ:
   initNewFeatures();
+   initPortfolioCarousels();
  
 }
 
