@@ -8,16 +8,17 @@ const TEXTS = {
   brand: "Link",
 
   /** Боковая навигация: id секции, подпись, иконка (для title) */
-  nav: [
-    { id: "hero", label: "ГЛАВНАЯ", icon: "❖" },
-    { id: "formats", label: "ФОРМАТЫ", icon: "✦" },
-    { id: "how", label: "КАК ЭТО", icon: "◈" },
-    { id: "cases", label: "ДЕЛА", icon: "⚿" },
-    { id: "schedule", label: "РАСПИСАНИЕ", icon: "⊛" },
-    { id: "order", label: "ПОД КЛЮЧ", icon: "✉" },
-    { id: "reviews", label: "ОТЗЫВЫ", icon: "❝" },
-    { id: "faq", label: "FAQ", icon: "?" },
-  ],
+ nav: [
+ 
+  { id: "formats", label: "ФОРМАТЫ", icon: "✦" },
+  { id: "how", label: "КАК ЭТО", icon: "◈" },
+  { id: "cases", label: "ДЕЛА", icon: "⚿" },
+  { id: "schedule", label: "РАСПИСАНИЕ", icon: "⊛" },
+  { id: "order", label: "ПОД КЛЮЧ", icon: "✉" },
+  { id: "reviews", label: "ОТЗЫВЫ", icon: "❝" },
+  { id: "portfolio", label: "ПОРТФОЛИО", icon: "♔" },   // ← новый пункт
+  { id: "faq", label: "FAQ", icon: "?" },
+],
 
   ticker: {
     urgent: "◈ СРОЧНО ◈",
@@ -148,10 +149,10 @@ portfolio: {
     },
     {
       id: "office",
-      mainImage: "images/portfolio/yandex1.jpg",
+      mainImage: "images/yandex1.jpg",
       additionalImages: [
-        "images/portfolio/yandex2.jpg",
-        "images/portfolio/yandex3.jpg"
+        "images/yandex2.jpg",
+        "images/yandex3.jpg"
       ],
       title: "Корпоратив для коллег в офисе",
       budget: "15 000 ₽",
